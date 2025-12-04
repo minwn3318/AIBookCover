@@ -1,51 +1,18 @@
 package com.example.demo.service;
 
-
 import com.example.demo.domain.Book;
-import com.example.demo.repository.BookRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class BookService {
+public interface BookService {
 
-    private final BookRepository bookRepository;
+    List<Book> findAll();
 
-    // 전체 조회
-    public List<Book> findAll() {
-        return bookRepository.findAll();
-    }
+    Book save(Book book);
 
-    // 등록
-    public Book save(Book book) {
-        return bookRepository.save(book);
-    }
+    Book detail(Long id);
 
-    // 상세 조회
-    public Book detail(Long id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("책을 찾지 못했습니다."));
-    }
+    Book update(Long id, Book newData);
 
-    // 수정
-    public Book update(Long id, Book newData) {
-        Book book = detail(id);
-
-        book.setTitle(newData.getTitle());
-        book.setContent(newData.getContent());
-        book.setAuthor(newData.getAuthor());
-        book.setImageId(newData.getImageId());
-        book.setUpdateDate(java.time.LocalDate.now());
-
-        return bookRepository.save(book);
-    }
-
-    // 삭제
-    public void delete(Long id) {
-        bookRepository.deleteById(id);
-    }
+    void delete(Long id);
 }
 
