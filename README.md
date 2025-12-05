@@ -147,16 +147,19 @@ public class Comment {
 ### 📘 Book API 응답
 
 ✅ ① 도서 등록 (POST/api/books/register)
+
+### ✔ Request Body
 ```
-✔ Request Body
 {
   "title": "테스트 책",
   "content": "테스트 내용",
   "author": "홍길동",
   "imgUrl": "https://test-image.jpg"
 }
+```
 
-✔ Response
+### ✔ Response
+```
 {
   "bookId": 1,
   "title": "테스트 책",
@@ -168,6 +171,7 @@ public class Comment {
   "imgUrl": "https://test-image.jpg"
 }
 ```
+
 ## 🧪 **Postman API 테스트 결과**
 
 ✔ Book 등록 성공
