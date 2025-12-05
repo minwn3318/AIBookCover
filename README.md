@@ -67,14 +67,19 @@ src
 ```java
 @Entity
 public class Book {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
+
     private String title;
     private String content;
     private String author;
+    
     private Long viewCnt = 0L;
+
     private LocalDate regTime;
     private LocalDate updateTime;
+
     private String imgUrl;
 }
 ```
@@ -103,10 +108,13 @@ public class Book {
 ```java
 @Entity
 public class Comment {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
+
     private String content;
     private String author;
+
     private LocalDate regTime;
     private LocalDate updateTime;
 
