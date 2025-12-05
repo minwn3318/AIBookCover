@@ -14,19 +14,19 @@ public interface LikeRepository extends JpaRepository<Likes,Long> {
     @Query("UPDATE Likes l " +
             "SET l.like_yn = CASE WHEN l.like_yn = true THEN false ELSE true END " +
             "WHERE l.member.id = :memberId AND l.book.bookId = :bookId")
-    void likeToggle(@Param("memberId") Long memberId,
-                    @Param("bookId") Long bookId);
+    void likeToggle(@Param("bookId") Long bookId,
+                    @Param("memberId") Long memberId);
 
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO likes (member_id, book_id, like_yn) " +
             "VALUES (:memberId, :bookId, TRUE)",
             nativeQuery = true)
-    void insertLike(@Param("memberId") Long memberId,
-                    @Param("bookId") Long bookId);
+    void insertLike(@Param("bookId") Long bookId,
+                    @Param("memberId") Long memberId);
 
     @Query("SELECT l.like_yn FROM Likes l WHERE l.member.id = :memberId AND l.book.bookId = :bookId")
-    Boolean findLikeYn(Long memberId, Long bookId);
+    Boolean findLikeYn(Long bookId, Long memberId);
 
-    boolean existsByMember_IdAndBook_BookId(Long memberId, Long bookId);
+    boolean existsByMember_IdAndBook_BookId(Long bookId, Long memberId);
 }

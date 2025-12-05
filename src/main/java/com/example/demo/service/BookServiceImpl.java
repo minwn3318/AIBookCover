@@ -79,20 +79,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean likeToggle(Long member_id,Long book_id){
+    public boolean likeToggle(Long book_id,Long member_id){
 
-        boolean exists = likeRepository.existsByMember_IdAndBook_BookId(member_id, book_id);
+        boolean exists = likeRepository.existsByMember_IdAndBook_BookId(book_id, member_id);
 
         log.info("=================");
         log.info(exists);
         log.info("=================");
 
         if (exists) {
-            likeRepository.likeToggle(member_id, book_id);
-            return likeRepository.findLikeYn(member_id, book_id);
+            likeRepository.likeToggle(book_id, member_id);
+            return likeRepository.findLikeYn(book_id, member_id);
         } else {
-            likeRepository.insertLike(member_id, book_id);
-            return likeRepository.findLikeYn(member_id, book_id);
+            likeRepository.insertLike(book_id, member_id);
+            return likeRepository.findLikeYn(book_id, member_id);
         }
     }
 }

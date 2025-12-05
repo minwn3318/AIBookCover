@@ -19,7 +19,7 @@ public class Likes {
     @Column(name = "like_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
