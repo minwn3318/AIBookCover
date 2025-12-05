@@ -5,52 +5,66 @@ import com.example.demo.domain.Likes;
 import com.example.demo.dto.BookDTO;
 import com.example.demo.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@RequestMapping("/api/books")
 public class BookController {
 
     private final BookService bookService;
 
     // 도서 등록
-    @PostMapping("/register")
-    public Book create(@RequestBody Book book) {
-        return bookService.save(book);
+    @PostMapping
+    public ResponseEntity<Book> create(@RequestBody Book book) {
+        Book saved = bookService.save(book);
+        return ResponseEntity.status(201).body(saved); // 201 Created
     }
 
     // 도서 목록 조회
-    @GetMapping("/list")
-    public List<BookDTO> list() {
-        return bookService.findAll();
+    @GetMapping
+    public ResponseEntity<List<BookDTO>> list() {
+        return ResponseEntity.ok(bookService.findAll());
     }
 
     // 도서 상세 조회
-    @GetMapping("/detail")
-    public Book detail(@RequestParam Long id) {
-        return bookService.detail(id);
+    @GetMapping("/{bookId}")
+    public ResponseEntity<Book> detail(@PathVariable Long bookId) {
+        Book book = bookService.detail(bookId);
+        return ResponseEntity.ok(book);
     }
 
     // 도서 수정
-    @PutMapping("/update")
-    public Book update(@RequestBody Book book) {
-        return bookService.update(book.getBookId(), book);
+    @PutMapping("/{bookId}")
+    public ResponseEntity<Book> update(
+            @PathVariable Long bookId,
+            @RequestBody Book newData) {
+
+        Book updated = bookService.update(bookId, newData);
+        return ResponseEntity.ok(updated);
     }
 
     // 도서 삭제
-    @DeleteMapping("/delete")
-    public void delete(@RequestParam Long id) {
-        bookService.delete(id);
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<Void> delete(@PathVariable Long bookId) {
+        bookService.delete(bookId);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 
     //좋아요 클릭
-    @PostMapping("/like")
-    public void like(@RequestBody Likes like){
-        bookService.likeToggle(like.getBook().getBookId(), like.getMember().getId());
+    @PatchMapping("/{bookId}")
+    public ResponseEntity<?> like(@PathVariable Long bookId,@RequestBody Likes like){
+        boolean liked =  bookService.likeToggle(bookId, like.getMember().getId());
+
+        if(liked){
+            return ResponseEntity.ok("liked");
+        }else{
+            return ResponseEntity.ok("unliked");
+        }
+
     }
 }
 

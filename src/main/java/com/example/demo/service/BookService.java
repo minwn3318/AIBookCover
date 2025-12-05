@@ -17,5 +17,5 @@ public interface BookService {
 
     void delete(Long id);
 
-    void likeToggle(Long member_id,Long book_id);
+    boolean likeToggle(Long member_id,Long book_id);
 }

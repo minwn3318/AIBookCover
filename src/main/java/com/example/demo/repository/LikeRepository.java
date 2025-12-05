@@ -25,5 +25,8 @@ public interface LikeRepository extends JpaRepository<Likes,Long> {
     void insertLike(@Param("memberId") Long memberId,
                     @Param("bookId") Long bookId);
 
+    @Query("SELECT l.like_yn FROM Likes l WHERE l.member.id = :memberId AND l.book.bookId = :bookId")
+    Boolean findLikeYn(Long memberId, Long bookId);
+
     boolean existsByMember_IdAndBook_BookId(Long memberId, Long bookId);
 }
