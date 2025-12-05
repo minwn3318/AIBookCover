@@ -35,7 +35,7 @@
 ---
 
 # 📂 **2. 프로젝트 구조**
-
+```
 src
 └── main
     └── java
@@ -54,7 +54,7 @@ src
                 ├── BookServiceImpl.java
                 ├── CommentService.java
                 └── CommentServiceImpl.java
-
+```
 ---
 
 # 📘 **3. Book 기능 상세**
