@@ -1,15 +1,11 @@
 # 📚 Book CRUD + Comment CRUD API
-
+### Spring Boot · JPA · REST API · Postman Test
 이 프로젝트는 Spring Boot + JPA 기반의 Book CRUD API와 
 확장된 Comment CRUD 기능을 구현한 백엔드 과제입니다.
 
 본인은 백엔드 파트를 맡았으며 , 일단 백엔드 부분에 대한 설명 진행 하겠습니다 . 
 
 <div align="center">
-
-# 📚 **Book CRUD + Comment CRUD API**
-### Spring Boot · JPA · REST API · Postman Test
-
 <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=white&style=flat-square"/>
 <img src="https://img.shields.io/badge/Java-007396?logo=openjdk&logoColor=white&style=flat-square"/>
 <img src="https://img.shields.io/badge/JPA-59666C?logo=hibernate&logoColor=white&style=flat-square"/>
