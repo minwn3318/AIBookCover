@@ -28,7 +28,7 @@ public class Comment {
     @JoinColumn(name = "book_id")
     private Book book;
 
-//    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
