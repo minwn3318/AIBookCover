@@ -25,8 +25,7 @@ public class MemberController {
         response.setStatus("success");
         response.setMessage("회원가입 성공");
 
-        return ResponseEntity.ok()
-                .body(response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
@@ -51,7 +50,6 @@ public class MemberController {
 
     @GetMapping("/logout")
     public ResponseEntity<MessageDTO> logout(){
-        MessageDTO response =  memberService.logoutMember();
 
         ResponseCookie cookie = ResponseCookie.from("accessToken", "")
                 .httpOnly(true)
@@ -60,7 +58,10 @@ public class MemberController {
                 .maxAge(0)  // 쿠키 즉시 만료
                 .build();
 
-        return ResponseEntity.ok()
-                .body(response);
+        MessageDTO response = new MessageDTO();
+        response.setStatus("success");
+        response.setMessage("로그아웃 성공");
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.component.JwtUtil;
+import com.example.demo.security.JwtUtil;
 import com.example.demo.domain.Member;
-import com.example.demo.dto.MessageDTO;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,11 @@ public class MemberServiceImpl implements MemberService{
     * */
     @Override
     public void joinMember(Member member){
-        memberRepository.save(member);
+        try {
+            memberRepository.save(member);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("회원가입이 불가합니다");
+        }
     }
 
     /*
@@ -46,14 +49,6 @@ public class MemberServiceImpl implements MemberService{
 
         return jwtUtil.generateToken(findingMember.getLoginId());
 
-    }
-
-    @Override
-    public MessageDTO logoutMember(){
-        MessageDTO message = new MessageDTO();
-        message.setStatus("success");
-        message.setMessage("로그아웃 성공");
-        return message;
     }
 
 }

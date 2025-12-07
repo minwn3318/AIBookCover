@@ -1,8 +1,7 @@
-package com.example.demo.component;
+package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.*;
-import io.jsonwebtoken.security.SignatureException;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -39,7 +38,7 @@ public class JwtUtil {
         }
     }
 
-    // Claims 추출 - 토큰의 바디를 추출하는 부분
+    // 토큰의 바디를 추출하는 부분
     public Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
@@ -47,4 +46,5 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
 }
