@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.Likes;
 import com.example.demo.dto.BookDTO;
+import com.example.demo.dto.CoverImageRequest;
 import com.example.demo.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -56,15 +57,24 @@ public class BookController {
 
     //좋아요 클릭
     @PatchMapping("/{bookId}")
-    public ResponseEntity<?> like(@PathVariable Long bookId,@RequestBody Likes like){
-        boolean liked =  bookService.likeToggle(bookId, like.getMember().getId());
+    public ResponseEntity<?> like(@PathVariable Long bookId,@RequestBody Likes like) {
+        boolean liked = bookService.likeToggle(bookId, like.getMember().getId());
 
-        if(liked){
+        if (liked) {
             return ResponseEntity.ok("liked");
-        }else{
+        } else {
             return ResponseEntity.ok("unliked");
         }
+    }
 
+    // AI 생성 이미지 URL 저장
+    @PutMapping("/{bookId}/cover-url")
+    public ResponseEntity<?> updateBookCoverUrl(
+            @PathVariable Long bookId,
+            @RequestBody CoverImageRequest request) {
+
+        Book updatedBook = bookService.updateBookCoverUrl(bookId, request.getImgUrl());
+        return ResponseEntity.ok(updatedBook);
     }
 }
 

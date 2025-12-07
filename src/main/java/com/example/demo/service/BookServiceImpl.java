@@ -79,6 +79,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
+    public Book updateBookCoverUrl(Long bookId, String imgUrl) {
+
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new ResourceNotFoundException("책을 찾지 못했습니다. bookId = " + bookId));
+
+        book.setImgUrl(imgUrl);
+        book.setUpdateTime(LocalDate.now());
+
+        return bookRepository.save(book);
+    }
+
+    @Override
     public boolean likeToggle(Long book_id,Long member_id){
 
         boolean exists = likeRepository.existsByMember_IdAndBook_BookId(book_id, member_id);
