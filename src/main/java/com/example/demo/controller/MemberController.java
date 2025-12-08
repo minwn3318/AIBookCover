@@ -16,7 +16,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/join")
+    @PostMapping
     public ResponseEntity<MessageDTO> join(@RequestBody Member member){
 
         memberService.joinMember(member);

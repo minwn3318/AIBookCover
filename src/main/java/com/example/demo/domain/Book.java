@@ -30,4 +30,8 @@ public class Book {
 
     @Column(name = "img_url")
     private String imgUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "member_loginId", referencedColumnName = "login_id")
+    private Member member;
 }

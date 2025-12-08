@@ -11,4 +11,6 @@ public interface MemberService {
     String loginMember(Member member);
 
     Long findIdByLoginId(String loginId);
+
+    Member findByLoginId(String loginId);
 }

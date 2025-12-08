@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Book;
+import com.example.demo.domain.Member;
 import com.example.demo.dto.BookDTO;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LikeRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,10 @@ import java.util.stream.Collectors;
 @Log4j2
 public class BookServiceImpl implements BookService {
 
+    private final HttpServletRequest request;
     private final BookRepository bookRepository;
     private final LikeRepository likeRepository;
+    private final MemberService memberRepository;
 
     @Override
     public List<BookDTO> findAll() {
@@ -58,6 +62,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(Book book) {
+        String loginId = (String) request.getAttribute("loginId");
+        Member member = memberRepository.findByLoginId(loginId);
+
+        book.setMember(member);
         book.setRegTime(LocalDate.now());      // reg_time
         book.setUpdateTime(LocalDate.now());   // update_time
         return bookRepository.save(book);
@@ -145,6 +153,7 @@ public class BookServiceImpl implements BookService {
                 })
                 .collect(Collectors.toList());
     }
+
 }
 
 

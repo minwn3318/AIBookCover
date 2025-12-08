@@ -24,4 +24,5 @@ public interface BookService {
     Book updateBookCoverUrl(Long bookId, String imgUrl);
 
     List<BookDTO> findLikedBooks(Long member_id);
+
 }

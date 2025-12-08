@@ -57,4 +57,11 @@ public class MemberServiceImpl implements MemberService{
                 .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
         return member.getId();
     }
+
+    @Override
+    public Member findByLoginId(String loginId){
+        return memberRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("유저 아이디를 찾을 수 없습니다."));
+    }
+
 }

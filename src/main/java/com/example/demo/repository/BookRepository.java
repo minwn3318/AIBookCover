@@ -12,4 +12,6 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findAllByOrderByViewCntDesc();
+
+    List<Book> findByMemberLoginId(String loginId);
 }

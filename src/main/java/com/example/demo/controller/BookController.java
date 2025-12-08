@@ -6,6 +6,7 @@ import com.example.demo.dto.BookDTO;
 import com.example.demo.dto.CoverImageRequest;
 import com.example.demo.service.BookService;
 import com.example.demo.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -77,7 +78,6 @@ public class BookController {
 
         return ResponseEntity.ok(likedBooks);
     }
-
 
     // AI 생성 이미지 URL 저장
     @PutMapping("/{bookId}/cover-url")
