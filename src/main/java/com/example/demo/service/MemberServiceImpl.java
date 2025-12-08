@@ -64,4 +64,10 @@ public class MemberServiceImpl implements MemberService{
                 .orElseThrow(() -> new RuntimeException("유저 아이디를 찾을 수 없습니다."));
     }
 
+    @Override
+    public boolean findLoginIdbyCheckId(String checkId) {
+
+        return memberRepository.checkDuplication(checkId);
+    }
+
 }

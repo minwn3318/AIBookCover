@@ -64,4 +64,31 @@ public class MemberController {
 
         return ResponseEntity.ok(response);
     }
+
+    //아이디 중복 확인 체크
+    @PostMapping("/check/{checkId}")
+    public ResponseEntity<?> checkLoginId(@PathVariable String checkId){
+
+        System.out.println("checkId : "+checkId);
+
+        boolean checking = memberService.findLoginIdbyCheckId(checkId);
+
+        System.out.println("checking : "+checking);
+
+        if(checking){
+            MessageDTO response = new MessageDTO();
+            response.setStatus("중복");
+            response.setMessage("중복된 아이디입니다.");
+            return ResponseEntity.ok(response);
+
+        }else{
+
+            MessageDTO response = new MessageDTO();
+            response.setStatus("사용가능");
+            response.setMessage("사용가능 한 아이디입니다.");
+            return ResponseEntity.ok(response);
+
+        }
+
+    }
 }
