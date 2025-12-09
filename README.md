@@ -116,7 +116,13 @@ src
 | 도서 삭제            | **DELETE** | `/api/mypage/{bookId}` | 내가 등록한 책만 삭제 가능    |
 
 
-## 8. 프로젝트 설계 문서 링크
+## 8. 빌드 및 실행
+IDE환경에서 jar파일로 빌드 후 cmd에서 실행하시면 됩니다
+```
+java -jar demo.jar
+```
+
+## 9. 프로젝트 설계 문서 링크
 프로젝트 전반의 흐름, ERD 구조, API 명세서, 협업 규칙 등이 담겨 있습니다.
 ```
 📄 프로젝트 흐름(notion)
@@ -135,7 +141,7 @@ src
 🔗 https://www.figma.com/design/zsT7VhkMluKt9uq4AteEPI/BOOK-UI
 
 
-## 9. 개발 중 배운 점 & 개선점
+## 10. 개발 중 배운 점 & 개선점
 ### 🔍 1) JWT + Cookie 기반 인증 설계 경험
 
 - AccessToken을 HTTP-Only 쿠키로 저장하여 XSS 공격을 원천 차단.
