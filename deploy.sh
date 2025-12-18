@@ -1,19 +1,32 @@
 #!/bin/bash
+set -e
 
 APP_DIR=/home/ec2-user/app
+cd $APP_DIR
 
-JAR_FILE=$(ls $APP_DIR/*.jar | grep -v plain | head -n 1)
+echo "=== deploy.sh started ==="
+echo "PWD: $(pwd)"
+echo "Files in app dir:"
+ls -l
+
+JAR_FILE=$(ls *.jar | grep -v plain | head -n 1)
 
 if [ -z "$JAR_FILE" ]; then
-  echo "No executable jar found"
+  echo "ERROR: executable jar not found"
   exit 1
 fi
 
-PID=$(pgrep -f "$JAR_FILE")
+echo "Using jar: $JAR_FILE"
+
+PID=$(pgrep -f "$JAR_FILE" || true)
 if [ -n "$PID" ]; then
+  echo "Killing existing PID: $PID"
   kill -15 $PID
   sleep 5
 fi
 
 nohup java -jar "$JAR_FILE" > app.log 2>&1 &
+
+echo "Application started"
+
 

@@ -9,7 +9,7 @@ phases:
 
   build:
     commands:
-      - ./gradlew clean build -x test
+    - ./gradlew clean bootJar -x test
         # Spring Boot 서버 빌드 명령
         # clean: 이전 빌드 결과 제거
         # build: 실행 가능한 jar 생성
