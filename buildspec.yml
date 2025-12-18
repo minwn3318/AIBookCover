@@ -18,5 +18,5 @@ phases:
 artifacts:
   files:
     - build/libs/*.jar  # 빌드된 Spring Boot jar 파일 (배포를 위해 필수)
-    - appspec.yaml
+    - appspec.yml
     - deploy-scripts/deploy.sh
