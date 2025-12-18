@@ -1,0 +1,20 @@
+version: 0.2  # buildspec 파일 포맷 버전 (필수)
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17  # Spring Boot + Gradle 빌드를 위한 Java 17 (필수)
+    commands:
+      - chmod +x ./gradlew  # Gradle Wrapper 실행 권한 부여 (필수)
+
+  build:
+    commands:
+      - ./gradlew clean build -x test
+        # Spring Boot 서버 빌드 명령
+        # clean: 이전 빌드 결과 제거
+        # build: 실행 가능한 jar 생성
+      # -x test: 테스트 제외 (선택이지만 CI 환경에서 보통 유지)
+
+artifacts:
+  files:
+    - build/libs/*.jar  # 빌드된 Spring Boot jar 파일 (배포를 위해 필수)
