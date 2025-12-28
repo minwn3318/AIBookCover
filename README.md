@@ -31,35 +31,14 @@ java -jar demo.jar
 BookMuseum 백엔드는 JWT 기반 인증 시스템, Spring Security 필터 체인 ,
 
 그리고 React 프론트엔드 + OpenAI 이미지 생성 API와 연동되는 구조로 설계되었습니다 . 
-### 📌 전체 요청 흐름
-```
-① [브라우저] 회원가입/로그인 요청 
-② [React Front] 로그인 성공 → 서버가 JWT 쿠키(accessToken) 발급 
-③ [Spring Boot Backend] 보호된 API 요청 시, JwtFilter가 accessToken 자동 검증 및 [DB(H2)] 로 이동
-```
+### 📌 전체 요청 흐름   
+![iamge](https://github.com/user-attachments/assets/b835309b-1784-43e5-ad28-cd0d1c96d391)
+<br>   
 
-### 📌 이미지 생성 흐름 (AI 책 표지)
-```
-사용자 → 프론트에서 OpenAI 이미지 생성 요청
-      → 생성된 imageURL을 서버에 PUT(/api/books/{id}/cover-url)으로 저장
-      → 책 상세 페이지 및 목록에서 저장된 이미지 자동 반영
-```
+### 📌 테이블   
+![table](https://github.com/user-attachments/assets/a53f4de5-5c72-45fc-8ec9-7a4d94772441)   
+<br>  
 
-### 📌 Security Filter 구조
-```
-요청 → SecurityConfig → JwtFilter → Controller → Service → DB
-```
-
-SecurityConfig의 인증 제외 API:
-
-- /api/member/**
-
-- /api/main/**
-
-- /h2-console/**
-
-그 외 /api/**는 모두 JWT 인증 필요.
- 
 ## 6. 프로젝트 디렉터리
 ```
 src
